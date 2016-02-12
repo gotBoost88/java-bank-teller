@@ -13,4 +13,12 @@ public class Bank {
 	public List<Customer> getCustomers() {
 		return customers;
 	}
+	
+/*	public void displayBank(){
+		for(Customer cust : getCustomers()){
+		System.out.println("1) "+getCustomers());
+		System.out.println();
+		}
+*/		
+	
 }

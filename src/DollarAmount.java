@@ -1,15 +1,13 @@
 //import com.techelevator.bank.DollarAmount;
 
-//import com.techelevator.bank.DollarAmount;
-
 public class DollarAmount {
 	private long totalAmountInCents;
 	public static final DollarAmount ZERO_DOLLARS = new DollarAmount(0);
 	
-	
 	public DollarAmount (long totalAmountInCents) {
 		this.totalAmountInCents = totalAmountInCents;
 	}
+
 	public int getCents() {
 		return (int) (totalAmountInCents % 100);
 	}
@@ -31,15 +29,11 @@ public class DollarAmount {
 		return (totalAmountInCents < 0);
 	}
 	public DollarAmount plus(DollarAmount amountToAdd) {
-		return new DollarAmount(this.totalAmountInCents + amountToAdd.totalAmountInCents);
+		return new DollarAmount(this.totalAmountInCents + amountToAdd.totalAmountInCents);//DollarAmount bagOfMoney = new DollarAmount(0);
 	}
 	public DollarAmount minus(DollarAmount amountToSubtract) {
 		return new DollarAmount(this.totalAmountInCents - amountToSubtract.totalAmountInCents);
 		
-	}
-	public String toString()
-	{
-		return "Your total is " + this.getDollars() + "."+ this.getCents();
 	}
 }
 	
