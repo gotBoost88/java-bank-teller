@@ -1,19 +1,17 @@
+//import com.techelevator.bank.DollarAmount;
+
+//import com.techelevator.bank.DollarAmount;
 
 public class DollarAmount {
 	private long totalAmountInCents;
-	int cents;
-	long dollars;
+	public static final DollarAmount ZERO_DOLLARS = new DollarAmount(0);
+	
 	
 	public DollarAmount (long totalAmountInCents) {
 		this.totalAmountInCents = totalAmountInCents;
 	}
-	public DollarAmount(long dollars, int cents) {
-		this.dollars = dollars;
-		this.cents = cents;
-		this.totalAmountInCents = this.dollars*100 + this.cents;
-	}
 	public int getCents() {
-	return (int) (totalAmountInCents % 100);
+		return (int) (totalAmountInCents % 100);
 	}
 	// 123
 	// 23
@@ -33,20 +31,15 @@ public class DollarAmount {
 		return (totalAmountInCents < 0);
 	}
 	public DollarAmount plus(DollarAmount amountToAdd) {
-		//DollarAmount bagOfMoney = new DollarAmount(0);
-		 long dollars = amountToAdd.getDollars();
-		 int cents = amountToAdd.getCents();
-		 long myDollars = this.getDollars();
-		 int myCents = this.getCents();
-		 return new DollarAmount (dollars+myDollars, cents+myCents);
+		return new DollarAmount(this.totalAmountInCents + amountToAdd.totalAmountInCents);
 	}
 	public DollarAmount minus(DollarAmount amountToSubtract) {
-		long dollars = amountToSubtract.getDollars();
-		int cents = amountToSubtract.getCents();
-		long myDollars = this.getDollars();
-		int myCents = this.getCents();
-		return new DollarAmount (myDollars - dollars, myCents - cents);
+		return new DollarAmount(this.totalAmountInCents - amountToSubtract.totalAmountInCents);
 		
+	}
+	public String toString()
+	{
+		return "Your total is " + this.getDollars() + "."+ this.getCents();
 	}
 }
 	

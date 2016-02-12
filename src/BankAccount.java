@@ -1,34 +1,41 @@
+//import com.techelevator.BankAccount;
+//import com.techelevator.Customer;
+//import com.techelevator.DollarAmount;
 
 public class BankAccount {
-	private String accountHolderName;
+	private Customer accountHolder;
 	private String accountNumber;
 	private DollarAmount balance;
 	
-	public BankAccount (DollarAmount balance) {
-		this.balance = balance;
+	public BankAccount(Customer accountHolder, String accountNumber) {
+		this.accountHolder = accountHolder;
+		this.accountNumber = accountNumber;
 	}
 	//public DollarAmount deposit (DollarAmount amountToDeposit) {
 		//this.balance.dollars += amountToDeposit.getDollars();
 		//this.balance.cents += amountToDeposit.getCents();
 		//return new DollarAmount (this.balance.dollars, this.balance.cents);
-	public DollarAmount deposit (DollarAmount amountToDeposit) {
-		DollarAmount amount1 = new DollarAmount (145);
-		amount1 = this.balance.plus(amountToDeposit);
-		this.balance = amount1;
-		return this.balance;
+	public DollarAmount deposit(DollarAmount amountToDeposit) {
+		balance = balance.plus(amountToDeposit);
+		return balance;
 	}
 	
-	public DollarAmount getBalance () {
-		return new DollarAmount (balance.getDollars(), balance.getCents());
+	public DollarAmount getBalance() {
+		return balance;
 	}
-	public DollarAmount withdraw (DollarAmount amountToWithdraw) {
-		this.balance.dollars -= amountToWithdraw.getDollars();
-		this.balance.cents -= amountToWithdraw.getCents();
+	public Customer getAccountHolder() {
+		return accountHolder;
+	}
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+	public DollarAmount withdraw(DollarAmount amountToWithdraw) {
+		balance = balance.minus(amountToWithdraw);
+		return balance;
 		
-		return new DollarAmount (balance.dollars, balance.cents);
 	}
-	public void transfer (BankAccount destinationAccount, DollarAmount transferAmount) {
-		destinationAccount.balance.dollars += transferAmount.getDollars();
-		destinationAccount.balance.cents += transferAmount.getCents();
+	public void transfer(BankAccount destinationAccount, DollarAmount amountToTransfer) {
+		this.withdraw(amountToTransfer);
+		destinationAccount.deposit(amountToTransfer);
 	}
 }
