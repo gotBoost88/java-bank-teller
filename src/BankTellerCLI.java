@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 //import com.techelevator.util.Terminal;
 
 public class BankTellerCLI {
@@ -32,11 +35,16 @@ public class BankTellerCLI {
 				String newBankAccountChoice = getUserInput("Enter account type number\n");
 				// need a method to create a new checking or savings account
 				
+				
 				String newAccountNumber = getUserInput("Enter new account number\n");
 				// need a method to add the account number to the new account
 				
-				
-				
+			} else if(choice.equals("3")) {
+				printBanner("DEPOSIT\n");
+				System.out.println("Choose a customer:\n");
+				displayBank();
+				System.out.println("Choose an account:\n");
+				getAccounts();
 
 				
 				//addAccount(newBankAccount);
@@ -73,9 +81,48 @@ public class BankTellerCLI {
 	
 	public void addAccount(BankAccount newAccount){
 		printBanner("ADD ACCOUNT");
+		
 		System.out.println("\nChoose a customer:\n");
 		
-	}
+		for(Customer cust : theBank.getCustomers()){
+			System.out.println( (theBank.getCustomers().indexOf(cust)+1)+") "+  cust.getName() +" " +cust.getAddress()+" "+cust.getPhoneNumber());
+		}
+		
+
+		System.out.println("1) Checking");
+		System.out.println("2) Savings");
+		
+	
+			
+			
+		String newBankAccountChoice = getUserInput("Enter account type number\n");
+		
+		while(true) {
+			//String choice;
+			// newAccount1;
+			//2SavingsAccount  newAccount2;
+			if(newBankAccountChoice == ("1")) {
+				//String accountNumber = getUserInput("Please enter an account number");
+				addAccount(new CheckingAccount(getUserInput("Please enter an account number")));
+				
+			
+			
+			}
+			 if(newBankAccountChoice == ("2")) {
+			
+				 addAccount( new SavingsAccount(getUserInput("Please enter an account number")));
+				//addAccount(newAccount2);
+				
+			
+			 }
+				
+		
+		//addAccount(newAccount);
+		System.out.println("\n*** "+newAccount.getAccountNumber()+"added to accounts ***");
+		}
+		
+		}		
+	
 	
 		public void displayBank(){
 			
@@ -90,15 +137,37 @@ public class BankTellerCLI {
 		//System.out.println();
 		     
 		}
-			
+		
+		
 		
 	}
 	public void deposit(DollarAmount amountToDeposit) {
 		printBanner("DEPOSIT");
-	
 		
+System.out.println("\nChoose a customer:\n");
 		
+		for(Customer cust : theBank.getCustomers()){
+			System.out.println( (theBank.getCustomers().indexOf(cust)+1)+") "+  cust.getName() +" " +cust.getAddress()+" "+cust.getPhoneNumber());
+			System.out.println("Enter number >>>");
+		}
+System.out.println("Choose an account:\n");	
+		BankAccount accountSelect = null;
+		List<BankAccount> accounts = new ArrayList<BankAccount>();
+		for(int x = 0; x < accounts.size(); x++) {
+			System.out.println(accounts.get(x));
+			System.out.println("Enter number >>>");
+			
+System.out.println("Enter an amount to deposit:\n");
+		
+		System.out.println("Enter amount >>>");	
+		deposit(amountToDeposit);
+		System.out.println("Enter amount >>>");
+		accountSelect.getBalance();
+		}
 	}
+		
+		
+	
 	private void printBanner(String bannerText) {
 		System.out.println("\n###### "+bannerText+" ######\n");
 	}
