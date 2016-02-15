@@ -1,17 +1,25 @@
-import static org.junit.Assert.*;
 
+
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
-import junit.framework.Assert;
 
 public class SavingsAccountTest {
+	
+	private SavingsAccount theAccount;
+	
+	@Before
+	public void setup() {
+		Customer aCustomer = new Customer("John Doe", "123 Main St", "123-456-7890");
+		SavingsAccount theAccount = new SavingsAccount(aCustomer, "123456789");
+	}
 
 	@Test
 	public void new_accounts_start_with_a_zero_balance() {
-		Customer aCustomer = new Customer("John Doe", "123 Main St", "123-456-7890");
-		SavingsAccount theAccount = new SavingsAccount(aCustomer, "123456789");
 		DollarAmount currentBalance = theAccount.getBalance();
-		Assert.assertEquals(DollarAmount.ZERO_DOLLARS, currentBalance);
+		DollarAmount zeroDollars = new DollarAmount(0);
+		Assert.assertEquals(zeroDollars, currentBalance);
 		
 	}
 	@Test
