@@ -22,4 +22,9 @@ public class SavingsAccount extends BankAccount {
 		return "Savings account "+getAccountNumber();
 	}
 	
+	public String getAccountType() {
+		
+		return "Savings Account";
+	}
+	
 }

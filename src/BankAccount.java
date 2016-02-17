@@ -2,7 +2,7 @@
 //import com.techelevator.Customer;
 //import com.techelevator.DollarAmount;
 
-public class BankAccount {
+public abstract class BankAccount {
 	private Customer accountHolder;
 	private String accountNumber;
 	private DollarAmount balance;
@@ -23,6 +23,11 @@ public class BankAccount {
 	public DollarAmount getBalance() {
 		return balance;
 	}
+	public void setinitialBalance() {
+		long initialBalance = 0;
+		DollarAmount startingBalance = new DollarAmount(initialBalance);
+		this.balance = startingBalance;
+	}
 	public Customer getAccountHolder() {
 		return accountHolder;
 	}
@@ -38,4 +43,6 @@ public class BankAccount {
 		this.withdraw(amountToTransfer);
 		destinationAccount.deposit(amountToTransfer);
 	}
+	public abstract String getAccountType();
+	
 }

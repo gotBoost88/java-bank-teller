@@ -21,4 +21,9 @@ public class CheckingAccount extends BankAccount {
 		return "Checking Account "+getAccountNumber();
 	}
 	
+	public String getAccountType() {
+		
+		return "Checking Account";
+	}
+	
 }
