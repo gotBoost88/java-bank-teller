@@ -27,16 +27,29 @@ public class BankTellerCLI {
 				displayBank();
 				
 				String customerNumber = getUserInput("Enter customer number\n");
-				
+				int convertedCustomerNumber = Integer.parseInt(customerNumber);
 				
 				System.out.println("1) Checking");
 				System.out.println("2) Savings");
 				
 				String newBankAccountChoice = getUserInput("Enter account type number\n");
-				// need a method to create a new checking or savings account
-				
+				int convertedBankAccountChoice = Integer.parseInt(newBankAccountChoice);
 				
 				String newAccountNumber = getUserInput("Enter new account number\n");
+				// need a method to create a new checking or savings account
+				if (convertedBankAccountChoice == 1) { //indicates a checking account
+					//System.out.println("Inside Checking Account  : "+ theBank.getCustomers().get(convertedCustomerNumber -1 ).getName()); 
+					CheckingAccount newAccount =  new CheckingAccount(theBank.getCustomers().get(convertedCustomerNumber -1 ), newAccountNumber);
+					System.out.println("New Checking Account created : "+ theBank.getCustomers().get(convertedCustomerNumber -1 ).getName() + " " +
+							newAccountNumber);
+				} else if (convertedBankAccountChoice == 2) { //indicates a savings account
+					SavingsAccount newAccount =  new SavingsAccount(theBank.getCustomers().get(convertedCustomerNumber -1 ), newAccountNumber);
+					System.out.println("New Savings Account created : "+ theBank.getCustomers().get(convertedCustomerNumber -1 ).getName() + " " +
+							newAccountNumber);
+		
+				}
+				
+				
 				// need a method to add the account number to the new account
 				
 			} else if(choice.equals("3")) {
@@ -44,7 +57,7 @@ public class BankTellerCLI {
 				System.out.println("Choose a customer:\n");
 				displayBank();
 				System.out.println("Choose an account:\n");
-				getAccounts();
+				//getAccounts();
 
 				
 				//addAccount(newBankAccount);
