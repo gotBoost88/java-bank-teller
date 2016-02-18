@@ -66,6 +66,8 @@ public class BankTellerCLI {
 				runDeposit();
 
 				// addAccount(newBankAccount);
+			} else if (choice.equals("4")) {
+				runWithdraw();
 
 			} else if (choice.equals("6")) {
 				exit();
@@ -189,7 +191,31 @@ public class BankTellerCLI {
 			//DollarAmount convertedDepositDollar = new DollarAmount(depositDollar.getDollars(),depositCents);
 			//theAccount.deposit(depositDollar);
 			theAccount.deposit(depositDollar);
-			System.out.println("New Balance is "+theAccount.getBalance());
+			System.out.println("New Balance is $"+theAccount.getBalance().getDollars());
+		}
+	}
+	public void runWithdraw() {
+		printBanner("WITHDRAWAL");
+		System.out.println("\nChoose a customer:\n");
+		displayBank();
+		String customerNumber = getUserInput("Enter customer number\n");
+		int convertedCustomerNumber = Integer.parseInt(customerNumber);
+		Customer chosenCustomer = theBank.getCustomers().get(convertedCustomerNumber - 1);
+		
+		System.out.println("Choose an account:\n");
+		
+		for (BankAccount theAccount : chosenCustomer.getAccounts()) {
+		System.out.println((chosenCustomer.getAccounts().indexOf(theAccount) + 1) + ") " + theAccount.getAccountType() + " "
+				+ theAccount.getAccountNumber());
+		String newWithdrawAccountChoice = getUserInput("Enter account type number\n");
+		int convertednewDepositWithDrawChoice = Integer.parseInt(newWithdrawAccountChoice);
+		System.out.println("You chose "+theAccount.getAccountType()+" "+theAccount.getAccountNumber());
+		String withdrawAmount = getUserInput("Enter an amount to withdraw:\n");
+		long convertedWithdrawAmount = Long.parseLong(withdrawAmount);
+		System.out.println("*** $"+withdrawAmount+" Withdrawn from "+theAccount.getAccountType()+" "+theAccount.getAccountNumber()+" ***");
+		DollarAmount withdrawDollar = new DollarAmount(convertedWithdrawAmount * 100);
+		theAccount.withdraw(withdrawDollar);
+		System.out.println("New Balance is $"+theAccount.getBalance().getDollars());
 		}
 	}
 
