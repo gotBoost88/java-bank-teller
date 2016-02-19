@@ -1,3 +1,10 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,8 +75,10 @@ public class BankTellerCLI {
 				// addAccount(newBankAccount);
 			} else if (choice.equals("4")) {
 				runWithdraw();
-
 			} else if (choice.equals("6")) {
+				runExportFile();
+
+			} else if (choice.equals("8")) {
 				exit();
 
 			}
@@ -85,7 +94,9 @@ public class BankTellerCLI {
 		System.out.println("3) Deposit");
 		System.out.println("4) Withdrawal");
 		System.out.println("5) Transfer");
-		System.out.println("6) Exit");
+		System.out.println("6) Export");
+		System.out.println("7) Import");
+		System.out.println("8) Exit");
 		System.out.println();
 
 		return getUserInput("Enter Number");
@@ -218,6 +229,58 @@ public class BankTellerCLI {
 		System.out.println("New Balance is $"+theAccount.getBalance().getDollars());
 		}
 	}
+	public void runExportFile() {
+		BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
+		OutputStream outStream = null;
+		printBanner("EXPORT DATA");
+		System.out.print("Enter path to export file >>>");
+		try { //(BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in)) {
+			String destPath = userInput.readLine();
+			//File destination = new File(destPath);
+			File destination = new File(destPath, "bank.txt");
+			destination.createNewFile();
+			outStream = new FileOutputStream(destination);
+			int totalAccount = 0;
+			String export = null;
+			String exportAccount = null;
+			try(PrintWriter writer = new PrintWriter(destination)) {
+				//writer.println(export);
+			for (Customer cust : theBank.getCustomers()) {
+				System.out.println(("C|"+ cust.getName() + "|"+cust.getAddress()+"|"+cust.getPhoneNumber()));
+				export = "C|"+ cust.getName() + "|"+cust.getAddress()+"|"+cust.getPhoneNumber();
+				//try(PrintWriter writer = new PrintWriter(destination)) {
+					writer.println(export);
+					for (BankAccount theAccount : cust.getAccounts()) {
+						
+						System.out.println(("A|"+theAccount.getAccountType().substring(0, 1)+"| "+theAccount.getAccountNumber()+"|"+theAccount.getBalance().getDollars()));
+						//export = "A|"+theAccount.getAccountType()+"|"+theAccount.getAccountNumber()+"|"+theAccount.getBalance().getDollars();
+						//writer.println(export);
+						exportAccount = "A|"+theAccount.getAccountType().substring(0, 1)+"|"+theAccount.getAccountNumber()+"|"+theAccount.getBalance().getDollars();
+						writer.println(exportAccount);
+						totalAccount++;
+					}
+				}
+			writer.close();
+			System.out.println("*** "+theBank.getCustomers().size()+" customers and "+totalAccount+" accounts were imported from"+destPath+"/bank.dat");
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {		
+	}
+		
+}
+		
+
+		/*String export = null;
+		for (Customer cust : theBank.getCustomers()) {
+			System.out.println(("C|"+ cust.getName() + "|"+cust.getAddress()+"|"+cust.getPhoneNumber()));
+			export = "C|"+ cust.getName() + "|"+cust.getAddress()+"|"+cust.getPhoneNumber();
+			try(PrintWriter writer = new PrintWriter(destination)) {
+				writer.println()
+		}
+		exportFile();
+	}*/
 
 	private void printBanner(String bannerText) {
 		System.out.println("\n###### " + bannerText + " ######\n");
